@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Tracker - Proyecto de Seguimiento Solar</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#172033;line-height:1.65}
+header{background:linear-gradient(135deg,#12355b,#176b87);color:white;padding:70px 20px;text-align:center}
+header h1{font-size:48px;margin:0 0 12px}
+header p{font-size:20px;max-width:760px;margin:auto}
+nav{background:#fff;position:sticky;top:0;padding:14px;text-align:center;box-shadow:0 2px 12px #0001;z-index:10}
+nav a{margin:0 12px;color:#176b87;text-decoration:none;font-weight:bold}
+main{max-width:1050px;margin:35px auto;padding:0 20px}
+section{background:white;padding:30px;margin-bottom:25px;border-radius:18px;box-shadow:0 5px 20px #0000000d}
+h2{color:#176b87;font-size:30px}
+h3{color:#12355b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{border:1px solid #e2e8f0;border-radius:14px;padding:20px;background:#fbfdff}
+.card strong{display:block;font-size:19px;color:#12355b;margin-bottom:6px}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:25px 0}
+.step{background:#e9f7fb;padding:15px 20px;border-radius:12px;font-weight:bold}
+.arrow{font-size:25px;color:#176b87}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{padding:13px;border-bottom:1px solid #e5e7eb;text-align:left}
+th{background:#e9f7fb;color:#12355b}
+footer{background:#12355b;color:white;text-align:center;padding:30px;margin-top:50px}
+.badge{display:inline-block;background:#f4c542;color:#172033;padding:6px 12px;border-radius:20px;font-weight:bold}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">Proyecto de Energía Solar</div>
+  <h1>☀️ Solar Tracker</h1>
+  <p>Sistema automático que orienta un panel solar hacia la fuente de luz para aprovechar mejor la radiación solar.</p>
+</header>
+
+<nav>
+<a href="#que-es">¿Qué es?</a>
+<a href="#funciona">Cómo funciona</a>
+<a href="#componentes">Componentes</a>
+<a href="#proceso">Proceso</a>
+<a href="#ventajas">Ventajas</a>
+</nav>
+
+<main>
+<section id="que-es">
+<h2>¿Qué es un Solar Tracker?</h2>
+<p>Un <strong>solar tracker</strong> o seguidor solar es un sistema que cambia automáticamente la posición de un panel fotovoltaico para mantenerlo orientado hacia la mayor cantidad posible de luz solar.</p>
+<p>La idea principal es sencilla: los sensores detectan desde qué dirección llega más luz, un microcontrolador analiza esas mediciones y un servomotor mueve el panel hasta acercarlo a la posición más favorable.</p>
+</section>
+
+<section id="funciona">
+<h2>¿Cómo funciona?</h2>
+<p>En un prototipo con Arduino, los LDR (resistores dependientes de la luz) funcionan como sensores. Cuando uno recibe más iluminación que otro, Arduino compara sus lecturas y ordena al servomotor girar hacia el lado con mayor iluminación.</p>
+<div class="flow">
+<div class="step">☀️ Luz solar</div><div class="arrow">→</div>
+<div class="step">👁️ LDR detecta</div><div class="arrow">→</div>
+<div class="step">🧠 Arduino compara</div><div class="arrow">→</div>
+<div class="step">⚙️ Servo mueve</div><div class="arrow">→</div>
+<div class="step">🔆 Panel se orienta</div>
+</div>
+<p>El ciclo se repite continuamente. Cuando las lecturas de los sensores son suficientemente parecidas, el motor puede detenerse y mantener el panel en esa posición.</p>
+</section>
+
+<section id="componentes">
+<h2>Componentes principales</h2>
+<div class="grid">
+<div class="card"><strong>☀️ Panel solar</strong>Convierte la energía de la radiación solar en energía eléctrica mediante sus celdas fotovoltaicas.</div>
+<div class="card"><strong>🧠 Arduino Nano</strong>Es el controlador del sistema. Lee los sensores y decide hacia dónde debe moverse el servomotor.</div>
+<div class="card"><strong>👁️ LDR</strong>Resistor sensible a la luz. Su comportamiento eléctrico cambia según la cantidad de iluminación que recibe.</div>
+<div class="card"><strong>⚙️ Servo SG90</strong>Motor pequeño que permite cambiar el ángulo del panel de forma controlada.</div>
+<div class="card"><strong>🔌 Resistencias</strong>Se utilizan junto con los LDR para formar circuitos divisores de tensión y obtener señales que Arduino puede medir.</div>
+<div class="card"><strong>🧩 Protoboard</strong>Permite montar y probar el circuito sin necesidad de soldar los componentes.</div>
+<div class="card"><strong>🔗 Cables Dupont</strong>Realizan las conexiones eléctricas entre Arduino, sensores, servo y protoboard.</div>
+<div class="card"><strong>🏗️ Estructura</strong>Sostiene el panel y permite que el mecanismo del servo cambie su orientación.</div>
+</div>
+</section>
+
+<section>
+<h2>Ejemplo de conexión y control</h2>
+<table>
+<tr><th>Elemento</th><th>Función</th></tr>
+<tr><td>LDR</td><td>Detecta la intensidad de la luz.</td></tr>
+<tr><td>Resistencia</td><td>Ayuda a convertir la variación del LDR en una señal eléctrica medible.</td></tr>
+<tr><td>Arduino Nano</td><td>Lee los valores, los compara y controla el movimiento.</td></tr>
+<tr><td>Servo SG90</td><td>Gira el soporte del panel.</td></tr>
+<tr><td>Panel fotovoltaico</td><td>Recibe la luz y genera electricidad.</td></tr>
+</table>
+</section>
+
+<section id="proceso">
+<h2>Proceso de funcionamiento</h2>
+<h3>1. Detección</h3>
+<p>Los LDR reciben la luz procedente del entorno. Una diferencia entre sus lecturas indica que la fuente de luz está más hacia un lado.</p>
+<h3>2. Comparación</h3>
+<p>Arduino recibe las señales de los sensores y compara sus valores para determinar hacia qué dirección debe corregirse la posición.</p>
+<h3>3. Movimiento</h3>
+<p>Arduino envía una orden al servomotor. El servo gira el soporte del panel unos grados en la dirección correspondiente.</p>
+<h3>4. Alineación</h3>
+<p>El movimiento continúa hasta que la diferencia entre las lecturas es pequeña. De esta forma, el panel queda orientado hacia la zona de mayor iluminación.</p>
+<h3>5. Repetición</h3>
+<p>Como la posición del Sol cambia durante el día, el sistema vuelve a medir y corregir la posición periódicamente.</p>
+</section>
+
+<section id="ventajas">
+<h2>Ventajas del sistema</h2>
+<div class="grid">
+<div class="card"><strong>☀️ Mejor orientación</strong>El panel puede mantenerse más cerca de una posición favorable respecto de la luz.</div>
+<div class="card"><strong>🤖 Automatización</strong>El sistema realiza las correcciones sin que una persona tenga que mover el panel manualmente.</div>
+<div class="card"><strong>🎓 Valor educativo</strong>Permite aprender sobre energía solar, sensores, programación, electrónica y automatización.</div>
+<div class="card"><strong>🔧 Fácil de ampliar</strong>Puede evolucionar desde un sistema de un eje hacia uno de dos ejes usando más sensores y servomotores.</div>
+</div>
+</section>
+
+<section>
+<h2>Conclusión</h2>
+<p>El Solar Tracker combina energía renovable y automatización. Los sensores LDR detectan diferencias de iluminación, Arduino procesa la información y el servomotor cambia la orientación del panel. Gracias a este funcionamiento, el prototipo demuestra de forma práctica cómo la electrónica y la programación pueden utilizarse para mejorar el aprovechamiento de la energía solar.</p>
+</section>
+
+<section>
+<h2>Fuentes de referencia</h2>
+<ul>
+<li>Arduino Project Hub — proyectos de seguidores solares con LDR, Arduino y servomotores.</li>
+<li>Clean Energy Institute, University of Washington — explicación del funcionamiento de un solar tracker con Arduino.</li>
+</ul>
+</section>
+</main>
+
+<footer>
+<p>Solar Tracker — Proyecto educativo de energía renovable</p>
+</footer>
+</body>
+</html>
